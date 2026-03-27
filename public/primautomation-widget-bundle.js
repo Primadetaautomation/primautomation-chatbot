@@ -853,7 +853,9 @@
         addChatMessage("agent", data.reply);
       }
       if (data.escalate) {
-        await escalateToHuman("Agent could not resolve the issue");
+        dom.humanLink.classList.remove("pd-visible");
+        dom.contactForm.classList.add("pd-visible");
+        dom.phoneInput.focus();
       }
     } catch (err) {
       removeTypingIndicator();

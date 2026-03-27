@@ -994,9 +994,11 @@ async function sendTextMessage() {
       addChatMessage('agent', data.reply)
     }
 
-    // Auto-escalate if server says so
+    // Auto-escalate if server says so -> show contact form first
     if (data.escalate) {
-      await escalateToHuman('Agent could not resolve the issue')
+      dom.humanLink.classList.remove('pd-visible')
+      dom.contactForm.classList.add('pd-visible')
+      dom.phoneInput.focus()
     }
   } catch (err) {
     removeTypingIndicator()
