@@ -274,12 +274,14 @@ ${knowledge}
 // POST /api/escalate — Escalate to Telegram
 app.post('/api/escalate', escalateLimiter, async (req, res) => {
   try {
-    const { conversationId, messages: rawMessages, language, userEmail, escalationReason } = req.body
+    const { conversationId, messages: rawMessages, language, userEmail, userPhone, email, escalationReason } = req.body
     const messages = Array.isArray(rawMessages) && rawMessages.length > 0
       ? rawMessages
       : [{ role: 'user', content: escalationReason || 'Gebruiker wil een medewerker spreken' }]
 
     const lang = ['nl', 'en', 'de'].includes(language) ? language : 'nl'
+    const resolvedEmail = userEmail || email || null
+    const resolvedPhone = userPhone || null
 
     // Build conversation summary
     const conversationText = messages
@@ -296,7 +298,8 @@ app.post('/api/escalate', escalateLimiter, async (req, res) => {
       .insert({
         messages,
         language: lang,
-        user_email: userEmail || null,
+        user_email: resolvedEmail,
+        user_phone: resolvedPhone,
         status: 'escalated',
         escalation_reason: escalationReason || null,
       })
@@ -310,10 +313,11 @@ app.post('/api/escalate', escalateLimiter, async (req, res) => {
 
     // Send Telegram notification
     if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
-      const emailLine = userEmail ? `\nEmail: ${userEmail}` : ''
+      const phoneLine = resolvedPhone ? `\nTelefoon: ${resolvedPhone}` : ''
+      const emailLine = resolvedEmail ? `\nEmail: ${resolvedEmail}` : ''
       const formattedMessage =
         `\uD83D\uDFE2 <b>PrimAutomation Website Chat</b>\n\n` +
-        `Taal: ${lang}${emailLine}\n\n` +
+        `Taal: ${lang}${phoneLine}${emailLine}\n\n` +
         `${dutchSummary}\n\n` +
         `Antwoord op dit bericht om te reageren.`
 

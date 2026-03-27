@@ -29,6 +29,11 @@
       inputPlaceholder: "Typ een bericht...",
       send: "Verstuur",
       talkToHuman: "Praat met een medewerker",
+      contactPrompt: "Laat je gegevens achter zodat we je kunnen bereiken:",
+      phonePlaceholder: "Telefoonnummer *",
+      emailPlaceholderOptional: "E-mailadres (optioneel)",
+      contactSubmit: "Verbind mij",
+      phoneRequired: "Vul een telefoonnummer in",
       waitingForAgent: "We zoeken een medewerker voor je. Even geduld...",
       emailPrompt: "Geen medewerker beschikbaar. Laat je e-mailadres achter:",
       emailPlaceholder: "jouw@email.com",
@@ -44,6 +49,11 @@
       inputPlaceholder: "Type a message...",
       send: "Send",
       talkToHuman: "Talk to a human",
+      contactPrompt: "Leave your details so we can reach you:",
+      phonePlaceholder: "Phone number *",
+      emailPlaceholderOptional: "Email (optional)",
+      contactSubmit: "Connect me",
+      phoneRequired: "Please enter a phone number",
       waitingForAgent: "Looking for an available agent. Please wait...",
       emailPrompt: "No agent available. Leave your email address:",
       emailPlaceholder: "your@email.com",
@@ -643,6 +653,18 @@
       <button class="pa-email-submit" id="pa-email-submit"></button>
     </div>
   `;
+    const contactForm = el("div", { className: "pa-email-form", id: "pa-contact-form" });
+    contactForm.innerHTML = `
+    <p id="pa-contact-prompt" style="margin-bottom:8px;"></p>
+    <div class="pa-email-row" style="margin-bottom:6px;">
+      <input class="pa-email-input" id="pa-phone-input" type="tel" autocomplete="tel" style="flex:1;" />
+    </div>
+    <div class="pa-email-row" style="margin-bottom:6px;">
+      <input class="pa-email-input" id="pa-contact-email" type="email" autocomplete="email" style="flex:1;" />
+    </div>
+    <p id="pa-phone-error" style="color:#ef4444;font-size:12px;margin:0 0 6px;display:none;"></p>
+    <button class="pa-email-submit" id="pa-contact-submit" style="width:100%;"></button>
+  `;
     const humanLink = el("div", { className: "pa-human-link", id: "pa-human-link" });
     humanLink.innerHTML = `<button id="pa-human-btn"></button>`;
     const inputBar = el("div", { className: "pa-input-bar" });
@@ -660,6 +682,7 @@
     panel.appendChild(header);
     panel.appendChild(messages);
     panel.appendChild(humanLink);
+    panel.appendChild(contactForm);
     panel.appendChild(emailForm);
     panel.appendChild(inputBar);
     document.body.appendChild(bubble);
@@ -674,6 +697,12 @@
       langBadge: document.getElementById("pa-lang-badge"),
       closeBtn: document.getElementById("pd-close-btn"),
       messages,
+      contactForm,
+      contactPrompt: document.getElementById("pa-contact-prompt"),
+      phoneInput: document.getElementById("pa-phone-input"),
+      contactEmail: document.getElementById("pa-contact-email"),
+      phoneError: document.getElementById("pa-phone-error"),
+      contactSubmit: document.getElementById("pa-contact-submit"),
       emailForm,
       emailPrompt: document.getElementById("pa-email-prompt"),
       emailInput: document.getElementById("pa-email-input"),
@@ -689,6 +718,11 @@
     dom.headerTitle.textContent = state.escalated ? t("escalated", lang) : t("title", lang);
     dom.textInput.placeholder = t("inputPlaceholder", lang);
     dom.humanBtn.textContent = t("talkToHuman", lang);
+    dom.contactPrompt.textContent = t("contactPrompt", lang);
+    dom.phoneInput.placeholder = t("phonePlaceholder", lang);
+    dom.contactEmail.placeholder = t("emailPlaceholderOptional", lang);
+    dom.contactSubmit.textContent = t("contactSubmit", lang);
+    dom.phoneError.textContent = t("phoneRequired", lang);
     dom.emailPrompt.textContent = t("emailPrompt", lang);
     dom.emailInput.placeholder = t("emailPlaceholder", lang);
     dom.emailSubmit.textContent = t("emailSubmit", lang);
@@ -831,6 +865,21 @@
       dom.sendBtn.disabled = false;
     }
   }
+  async function submitContactForm() {
+    const phone = dom.phoneInput.value.trim();
+    const email = dom.contactEmail.value.trim();
+    if (!phone || phone.length < 6) {
+      dom.phoneError.style.display = "block";
+      dom.phoneInput.focus();
+      return;
+    }
+    dom.phoneError.style.display = "none";
+    dom.contactSubmit.disabled = true;
+    dom.contactForm.classList.remove("pd-visible");
+    state.userPhone = phone;
+    state.userEmail = email || null;
+    await escalateToHuman("User requested human agent");
+  }
   async function escalateToHuman(reason = "User requested human agent") {
     if (state.escalated) return;
     state.escalated = true;
@@ -840,6 +889,7 @@
     dom.panel.querySelector(".pa-header").style.background = "var(--pa-escalated-bg)";
     setStatus("typing", "");
     dom.humanLink.classList.remove("pd-visible");
+    dom.contactForm.classList.remove("pd-visible");
     addSystemMessage(t("waitingForAgent", state.language));
     try {
       const res = await fetch(`${API_BASE}/api/escalate`, {
@@ -849,7 +899,8 @@
           conversationId: state.conversationId || "widget-" + Date.now(),
           messages: state.chatHistory.length ? state.chatHistory : [{ role: "user", content: reason }],
           language: state.language,
-          email: null
+          userPhone: state.userPhone || null,
+          email: state.userEmail || null
         })
       });
       if (!res.ok) throw new Error(`Escalate failed: ${res.status}`);
@@ -969,7 +1020,22 @@
       autoResizeTextarea();
     });
     dom.humanBtn.addEventListener("click", () => {
-      escalateToHuman('User clicked "Talk to human" button');
+      dom.humanLink.classList.remove("pd-visible");
+      dom.contactForm.classList.add("pd-visible");
+      dom.phoneInput.focus();
+    });
+    dom.contactSubmit.addEventListener("click", submitContactForm);
+    dom.phoneInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        dom.contactEmail.focus();
+      }
+    });
+    dom.contactEmail.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        submitContactForm();
+      }
     });
     dom.emailSubmit.addEventListener("click", submitEmail);
     dom.emailInput.addEventListener("keydown", (e) => {
