@@ -93,10 +93,10 @@ async function cleanupRateLimits() {
 }
 if (!process.env.VERCEL) setInterval(cleanupRateLimits, 15 * 60 * 1000)
 
-const chatLimiter = createLimiter('pa-chat', 1 * 60 * 1000, 20)
-const escalateLimiter = createLimiter('pa-escalate', 15 * 60 * 1000, 5)
-const replyLimiter = createLimiter('pa-reply', 1 * 60 * 1000, 30)
-const pollLimiter = createLimiter('pa-poll', 1 * 60 * 1000, 60)
+const chatLimiter = createLimiter('pa-chat', 1 * 60 * 1000, 10)       // 10 msgs/min per IP
+const escalateLimiter = createLimiter('pa-escalate', 15 * 60 * 1000, 3) // 3 escalations/15min
+const replyLimiter = createLimiter('pa-reply', 1 * 60 * 1000, 15)     // 15 replies/min
+const pollLimiter = createLimiter('pa-poll', 1 * 60 * 1000, 30)       // 30 polls/min
 
 // =====================================================
 // CORS
