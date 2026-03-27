@@ -59,7 +59,7 @@ const UI_STRINGS = {
     phonePlaceholder: 'Telefoonnummer *',
     emailPlaceholderOptional: 'E-mailadres (optioneel)',
     contactSubmit: 'Verbind mij',
-    phoneRequired: 'Vul een telefoonnummer in',
+    phoneRequired: 'Vul een geldig telefoonnummer in (bijv. 06-12345678)',
     waitingForAgent: 'We zoeken een medewerker voor je. Even geduld...',
     emailPrompt: 'Geen medewerker beschikbaar. Laat je e-mailadres achter:',
     emailPlaceholder: 'jouw@email.com',
@@ -79,7 +79,7 @@ const UI_STRINGS = {
     phonePlaceholder: 'Phone number *',
     emailPlaceholderOptional: 'Email (optional)',
     contactSubmit: 'Connect me',
-    phoneRequired: 'Please enter a phone number',
+    phoneRequired: 'Please enter a valid phone number (e.g. +31 6 12345678)',
     waitingForAgent: 'Looking for an available agent. Please wait...',
     emailPrompt: 'No agent available. Leave your email address:',
     emailPlaceholder: 'your@email.com',
@@ -1019,8 +1019,9 @@ async function submitContactForm() {
   const phone = dom.phoneInput.value.trim()
   const email = dom.contactEmail.value.trim()
 
-  // Phone is required
-  if (!phone || phone.length < 6) {
+  // Phone validation: must start with + or 0, 8-15 digits
+  function isValidPhone(n) { return /^(\+|0)\d{7,14}$/.test(n.replace(/[\s\-\(\)\.]/g, '')) }
+  if (!phone || !isValidPhone(phone)) {
     dom.phoneError.style.display = 'block'
     dom.phoneInput.focus()
     return
