@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 3001
 // =====================================================
 
 const supabase = createClient(
-  process.env.SUPABASE_URL || 'https://olstawiscsdrziypkrlf.supabase.co',
+  process.env.SUPABASE_URL || 'https://lejnywvqvylvpnjcumyn.supabase.co',
   process.env.SUPABASE_KEY
 )
 
