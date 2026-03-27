@@ -103,6 +103,8 @@ const pollLimiter = createLimiter('pa-poll', 1 * 60 * 1000, 60)
 // =====================================================
 
 const ALLOWED_ORIGINS = new Set([
+  'https://primautomation.nl',
+  'https://www.primautomation.nl',
   'https://primautomation.com',
   'https://www.primautomation.com',
   'https://primautomation-cms.vercel.app',
