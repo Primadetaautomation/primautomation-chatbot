@@ -1,8 +1,8 @@
 (() => {
   // public/primautomation-widget.js
-  var ACCENT = "#0d9488";
-  var ACCENT_HOVER = "#0f766e";
-  var ACCENT_DARK = "#115e59";
+  var ACCENT = "#0EA5E9";
+  var ACCENT_HOVER = "#0284C7";
+  var ACCENT_DARK = "#075985";
   var POLL_INTERVAL_MS = 5e3;
   var ESCALATION_TIMEOUT_MS = 5 * 60 * 1e3;
   var HUMAN_LINK_THRESHOLD = 3;

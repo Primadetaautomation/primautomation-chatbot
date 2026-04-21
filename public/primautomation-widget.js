@@ -9,9 +9,9 @@
 // Constants
 // ---------------------------------------------------------------------------
 
-const ACCENT = '#0d9488'
-const ACCENT_HOVER = '#0f766e'
-const ACCENT_DARK = '#115e59'
+const ACCENT = '#0EA5E9'
+const ACCENT_HOVER = '#0284C7'
+const ACCENT_DARK = '#075985'
 const POLL_INTERVAL_MS = 5000
 const ESCALATION_TIMEOUT_MS = 5 * 60 * 1000 // 5 minutes
 const HUMAN_LINK_THRESHOLD = 3 // show "talk to human" after 3rd agent message
