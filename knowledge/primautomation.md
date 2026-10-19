@@ -15,15 +15,15 @@ PrimAutomation is een AI-gedreven softwareontwikkelingsbedrijf gevestigd in Zaan
 ### Werkwijze
 
 1. **Gratis Intake** - Vrijblijvend gesprek over je idee en wensen
-2. **MVP in 5 dagen** - Een werkend minimaal product wordt razendsnel gebouwd
-3. **Jij beslist** - Alleen betalen als je tevreden bent. Geen verplichtingen.
+2. **Prototype binnen 2 weken** - Binnen 2 weken na de intake een werkend prototype van je idee, betaald werk met een vaste prijs die je na de intake hoort
+3. **Offerte** - Na het prototype krijg je een offerte voor de volledige app. Jij beslist of je doorgaat. Ga je met ons door, dan verrekenen we het prototype: dan was het gratis.
 
 ---
 
 ## Diensten
 
 ### Snelle MVP Ontwikkeling
-- Werkend product binnen 5 dagen
+- Werkend prototype binnen 2 weken na de intake
 - Van idee naar prototype in recordtijd
 - Geschikt voor startups die snel willen valideren
 
@@ -51,7 +51,7 @@ PrimAutomation is een AI-gedreven softwareontwikkelingsbedrijf gevestigd in Zaan
 
 ## Voordelen
 
-- **Razendsnel** - MVP in 5 dagen, niet 5 maanden
+- **Razendsnel** - prototype binnen 2 weken, niet 5 maanden
 - **Transparant** - Geen verborgen kosten, eerlijke prijzen
 - **Geen vendor lock-in** - Jouw code is van jou
 - **Flexibel opschaalbaar** - Groei in je eigen tempo
@@ -74,10 +74,10 @@ PrimAutomation werkt met de nieuwste tools en technologieen:
 ## Veelgestelde Vragen
 
 ### Wat kost het om een MVP te laten bouwen?
-De kosten hangen af van de complexiteit van je project. De intake is gratis en vrijblijvend. Na de intake krijg je een transparante offerte. Je betaalt alleen als je tevreden bent.
+De kosten hangen af van de complexiteit van je project. De intake is gratis en vrijblijvend. Na de intake hoor je de vaste prijs van het prototype, dat binnen 2 weken na de intake klaar is. Na het prototype krijg je een offerte voor de volledige app. Ga je met ons door, dan verrekenen we het prototype: dan was het gratis. Het prototype is niet vooraf gratis. Noem zelf geen bedragen voor het prototype.
 
 ### Hoe snel kan mijn project klaar zijn?
-Een MVP kan binnen 5 dagen worden opgeleverd. Complexere projecten duren langer, maar door onze AI-first aanpak zijn we altijd sneller dan traditionele ontwikkeling.
+Een werkend prototype staat binnen 2 weken na de intake live. Complexere projecten duren langer, maar door onze AI-first aanpak zijn we altijd sneller dan traditionele ontwikkeling.
 
 ### Wat is een MVP?
 Een Minimum Viable Product (MVP) is de eenvoudigste versie van je product die nog steeds waarde levert. Het helpt je om snel te valideren of je idee werkt, voordat je veel investeert.
