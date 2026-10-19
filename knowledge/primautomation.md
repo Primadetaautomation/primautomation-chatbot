@@ -74,7 +74,7 @@ PrimAutomation werkt met de nieuwste tools en technologieen:
 ## Veelgestelde Vragen
 
 ### Wat kost het om een MVP te laten bouwen?
-De kosten hangen af van de complexiteit van je project. De intake is gratis en vrijblijvend. Na de intake hoor je de vaste prijs van het prototype, dat binnen 2 weken na de intake klaar is. Na het prototype krijg je een offerte voor de volledige app. Ga je met ons door, dan verrekenen we het prototype: dan was het gratis. Het prototype is niet vooraf gratis. Noem zelf geen bedragen voor het prototype.
+De kosten hangen af van de complexiteit van je project. De intake is gratis en vrijblijvend. Na de intake hoor je de vaste prijs van het prototype, dat binnen 2 weken na de intake klaar is. Na het prototype krijg je een offerte voor de volledige app. Ga je met ons door, dan verrekenen we het prototype: dan was het gratis. Het prototype is niet vooraf gratis. Noem zelf geen bedragen voor het prototype. Wie tijdens of na het prototype stopt, betaalt de afgesproken vaste prijs van het prototype en houdt de code, het domein en de data. Zeg dus niet dat de klant geen risico loopt of het geld terugkrijgt bij stoppen: alleen wie doorgaat met de volledige app krijgt het prototype verrekend.
 
 ### Hoe snel kan mijn project klaar zijn?
 Een werkend prototype staat binnen 2 weken na de intake live. Complexere projecten duren langer, maar door onze AI-first aanpak zijn we altijd sneller dan traditionele ontwikkeling.
